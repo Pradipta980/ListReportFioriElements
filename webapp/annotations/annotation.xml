@@ -81,6 +81,84 @@
             <Annotations Target="NorthwindModel.Employee/Employee1/HireDate">
                 <Annotation Term="Common.Label" String="D.O.J."/>
             </Annotations>
+            <Annotations Target="NorthwindModel.Order/CustomerID">
+                <Annotation Term="Common.Label" String="Customer ID"/>
+            </Annotations>
+            <Annotations Target="NorthwindModel.Customer/CompanyName">
+                <Annotation Term="Common.Label" String="Company Name"/>
+            </Annotations>
+            <Annotations Target="NorthwindModel.Customer/ContactName">
+                <Annotation Term="Common.Label" String="Contact Person"/>
+            </Annotations>
+            <Annotations Target="NorthwindModel.Order/OrderDate">
+                <Annotation Term="Common.Label" String="Order Date"/>
+            </Annotations>
+            <Annotations Target="NorthwindModel.Order/RequiredDate">
+                <Annotation Term="Common.Label" String="Required By Date"/>
+            </Annotations>
+            <Annotations Target="NorthwindModel.Order/ShipName">
+                <Annotation Term="Common.Label" String="Ship Name"/>
+            </Annotations>
+            <Annotations Target="NorthwindModel.Order/ShipAddress">
+                <Annotation Term="Common.Label" String="ShipAddress"/>
+            </Annotations>
+            <Annotations Target="NorthwindModel.Order/ShipCity">
+                <Annotation Term="Common.Label" String="Ship City"/>
+            </Annotations>
+            <Annotations Target="NorthwindModel.Order/ShipRegion">
+                <Annotation Term="Common.Label" String="Ship Region"/>
+            </Annotations>
+            <Annotations Target="NorthwindModel.Order/ShipCountry">
+                <Annotation Term="Common.Label" String="Ship Country"/>
+            </Annotations>
+            <Annotations Target="NorthwindModel.Order/ShipPostalCode">
+                <Annotation Term="Common.Label" String="Ship PostalCode"/>
+            </Annotations>
+            <Annotations Target="NorthwindModel.Order/Freight">
+                <Annotation Term="Common.Label" String="Freight"/>
+            </Annotations>
+            <Annotations Target="NorthwindModel.Order/ShipVia">
+                <Annotation Term="Common.Label" String="Ship Via"/>
+            </Annotations>
+            <Annotations Target="NorthwindModel.Order/ShippedDate">
+                <Annotation Term="Common.Label" String="Shipped Date"/>
+            </Annotations>
+            <Annotations Target="NorthwindModel.Shipper/ShipperID">
+                <Annotation Term="Common.Label" String="Shipper ID"/>
+            </Annotations>
+            <Annotations Target="NorthwindModel.Shipper/CompanyName">
+                <Annotation Term="Common.Label" String="Company Name"/>
+            </Annotations>
+            <Annotations Target="NorthwindModel.Shipper/Phone">
+                <Annotation Term="Common.Label" String="Phone"/>
+            </Annotations>
+            <Annotations Target="NorthwindModel.Product/ProductID">
+                <Annotation Term="Common.Label" String="Product ID"/>
+            </Annotations>
+            <Annotations Target="NorthwindModel.Product/ProductName">
+                <Annotation Term="Common.Label" String="Product Name"/>
+            </Annotations>
+            <Annotations Target="NorthwindModel.Supplier/CompanyName">
+                <Annotation Term="Common.Label" String="Company Name"/>
+            </Annotations>
+            <Annotations Target="NorthwindModel.Order_Detail/Quantity">
+                <Annotation Term="Common.Label" String="Quantity"/>
+            </Annotations>
+            <Annotations Target="NorthwindModel.Order_Detail/UnitPrice">
+                <Annotation Term="Common.Label" String="Unit Price"/>
+            </Annotations>
+            <Annotations Target="NorthwindModel.Order_Detail/Discount">
+                <Annotation Term="Common.Label" String="Discount"/>
+            </Annotations>
+            <Annotations Target="NorthwindModel.Territory/TerritoryID">
+                <Annotation Term="Common.Label" String="Territory ID"/>
+            </Annotations>
+            <Annotations Target="NorthwindModel.Territory/TerritoryDescription">
+                <Annotation Term="Common.Label" String="Territory Description"/>
+            </Annotations>
+            <Annotations Target="NorthwindModel.Region/RegionDescription">
+                <Annotation Term="Common.Label" String="Region Description"/>
+            </Annotations>
             <!-- END LABELS -->
             <Annotations Target="NorthwindModel.Employee">
                 <Annotation Term="UI.HeaderInfo" >
@@ -121,7 +199,7 @@
                             <PropertyValue Property="Value" Path="LastName"/>
                         </Record>
                         <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="Employee1/EmployeeID"/>
+                            <PropertyValue Property="Value" Path="ReportsTo"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="Title"/>
@@ -250,7 +328,41 @@
                     <Record Type="UI.HeaderInfoType">
                         <PropertyValue Property="TypeName" String="Order"/>
                         <PropertyValue Property="TypeNamePlural" String="Order"/>
+                        <PropertyValue Property="Title">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="OrderID"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="Description">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="Customer/CompanyName"/>
+                            </Record>
+                        </PropertyValue>
                     </Record>
+                </Annotation>
+                <Annotation Term="UI.Facets" >
+                    <Collection>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#FgOrderDetails"/>
+                            <PropertyValue Property="Label" String="Order Details"/>
+                            <PropertyValue Property="ID" String="idSectionOrderDetails"/>
+                        </Record>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Target" AnnotationPath="Order_Details/@UI.LineItem#LiOrderItems"/>
+                            <PropertyValue Property="Label" String="Item Details"/>
+                            <PropertyValue Property="ID" String="idSectionOrderItems"/>
+                        </Record>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#FgShippingDetails"/>
+                            <PropertyValue Property="Label" String="Shipping Details"/>
+                            <PropertyValue Property="ID" String="idSectionShippingDetails"/>
+                        </Record>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#FgShipperDetails"/>
+                            <PropertyValue Property="Label" String="Shipper Details"/>
+                            <PropertyValue Property="ID" String="idSectionShipperDetails"/>
+                        </Record>
+                    </Collection>
                 </Annotation>
                 <Annotation Term="UI.LineItem" Qualifier="LiOrders">
                     <Collection>
@@ -258,7 +370,124 @@
                             <PropertyValue Property="Value" Path="OrderID"/>
                         </Record>
                         <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Customer/CustomerID"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Customer/CompanyName"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Customer/ContactName"/>
+                        </Record>
+                        <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="ShipAddress"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="FgOrderDetails">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="CustomerID"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="Customer/CompanyName"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="Customer/ContactName"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="OrderDate"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="RequiredDate"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="FgShippingDetails">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>                                
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="ShipName"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="ShipAddress"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="ShipCity"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="ShipRegion"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="ShipCountry"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="ShipPostalCode"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="Freight"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="ShipVia"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="ShippedDate"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="FgShipperDetails">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="Shipper/ShipperID"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="Shipper/CompanyName"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="Shipper/Phone"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="NorthwindModel.Order_Detail">
+                <Annotation Term="UI.HeaderInfo" >
+                    <Record Type="UI.HeaderInfoType">
+                        <PropertyValue Property="TypeName" String="Item"/>
+                        <PropertyValue Property="TypeNamePlural" String="Items"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.LineItem" Qualifier="LiOrderItems">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Product/ProductID"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Product/ProductName"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Product/Category/CategoryName"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Product/Supplier/CompanyName"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Quantity"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="UnitPrice"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Discount"/>
                         </Record>
                     </Collection>
                 </Annotation>

@@ -148,14 +148,14 @@
             "pages": {
               "ObjectPage|Orders": {
                 "entitySet": "Orders",
-                "defaultLayoutTypeIfExternalNavigation": "MidColumnFullScreen",
+                "defaultLayoutTypeIfExternalNavigation": "EndColumnFullScreen",
                 "component": {
                   "name": "sap.suite.ui.generic.template.ObjectPage"
                 }
               },
               "ObjectPage|Territories": {
                 "entitySet": "Territories",
-                "defaultLayoutTypeIfExternalNavigation": "MidColumnFullScreen",
+                "defaultLayoutTypeIfExternalNavigation": "EndColumnFullScreen",
                 "component": {
                   "name": "sap.suite.ui.generic.template.ObjectPage"
                 }
